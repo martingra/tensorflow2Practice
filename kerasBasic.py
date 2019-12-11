@@ -12,7 +12,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Activation
 from tensorflow.keras.models import load_model
 
-from sklearn import mean_absoulte_error, mean_squared_error
+from sklearn.metrics import mean_absolute_error,mean_squared_error
 
 df = pd.read_csv('DATA/fake_reg.csv')
 df.head()
@@ -83,14 +83,14 @@ sns.scatterplot(x='Test Y',y='Model Predictions',data=pred_df)
 
 pred_df['Error'] = pred_df['Test Y'] - pred_df['Model Predictions']
 sns.distplot(pred_df['Error'],bins=50)
-plt.show()
 
 
-mae = mean_absoulte_error(pred_df['Test Y', 'Model Predictions'])
+
+mae = mean_absolute_error(pred_df['Test Y'],pred_df['Model Predictions'])
 print(mae)
-mse = mean_squared_error(pred_df['Test Y', 'Model Predictions'])
+mse = mean_squared_error(pred_df['Test Y'],pred_df['Model Predictions'])
 print(mse)
-mrse = mean_squared_error(pred_df['Test Y', 'Model Predictions'])**0.5
+mrse = mean_squared_error(pred_df['Test Y'],pred_df['Model Predictions'])**0.5
 print(mrse)
 
 
@@ -107,3 +107,6 @@ sample = scaler.transform(sample)
 # and now we can predict
 sample_output = mdl.predict(sample)
 print(sample_output)
+
+
+plt.show()
